@@ -1,3 +1,3 @@
 #### Kurs och kursrepo
 
-Kursens länkar [https://dbwebb.se/kurser/oophp-v5](Hemsida) och till [https://github.com/dbwebb-se/oophp](Github).
+Kursens länkar till [hemsidan på BTH](https://dbwebb.se/kurser/oophp-v5) och till [github](https://github.com/dbwebb-se/oophp).
