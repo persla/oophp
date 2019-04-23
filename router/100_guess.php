@@ -21,7 +21,16 @@ $app->router->get("guess/init", function () use ($app) {
  */
 $app->router->get("guess/play", function () use ($app) {
     // echo "Some debugging information";
-    return ["Play the game!!!"];
+    $title = "Play the game";
+    $data = [
+        "who" => "Batman",
+    ];
+
+    $app->page->add("guess/play", $data);
+
+    return $app->page->render([
+        "title" => $title,
+    ]);
 });
 
 
