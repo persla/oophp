@@ -11,6 +11,10 @@
  */
 $app->router->get("guess/init", function () use ($app) {
     // Init the seiion for the gamestart
+    $game = new Persla\Guess\Guess();
+
+    $_SESSION["number"] = $game->number();
+    $_SESSION["tries"] = $game->tries();
     return $app->response->redirect("guess/play");
 });
 
