@@ -13,8 +13,8 @@ namespace Persla\View;
 ?><h1>Guess my number</h1>
 <!-- <p>Guess a number between 1 and 100, you have <?= $_SESSION["tries"] ?> left</p> -->
 <p>Guess a number between 1 and 100, you have <?= $tries ?> left</p>
-<?= var_dump($readonly); ?>
-<?= var_dump($tries); ?>
+<!-- <?= var_dump($readonly); ?>
+<?= var_dump($tries); ?> -->
 <form method="post">
 
     <input type="number" <?= $readonly ?> name="guess">
@@ -31,7 +31,6 @@ namespace Persla\View;
 <?php if ($doCheat) :?>
     <p>CHEAT: Current number is <?= $number ?> </p>
 <?php endif;?>
-debug text
 
 <pre>
 <!-- <?=var_dump($_POST)?>

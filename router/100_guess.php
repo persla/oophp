@@ -26,33 +26,16 @@ $app->router->get("guess/init", function () use ($app) {
 $app->router->get("guess/play", function () use ($app) {
     //echo "Some debugging information";
     $title = "Play the game";
-    // $data = [
-    //     "who" => "Batman",
-    // ];
-    // $guess = $_POST["guess"] ?? null;
-    // $doInit = $_POST["doInit"] ?? null;
-    // $doGuess = $_POST["doGuess"] ?? null;
-    // $doCheat = $_POST["doCheat"] ?? null;
-    // $number = $_SESSION["number"] ?? null;
     $tries = $_SESSION["tries"] ?? null;
-    // $game = null;
+    $number = $_SESSION["number"] ?? null;
+    $readonly = $_SESSION["readonly"] ?? null;
+    $doCheat = $_SESSION["doCheat"] ?? null;
     $res = $_SESSION["res"] ?? null;
     $guess = $_SESSION["guess"] ?? null;
     $_SESSION["res"] = null;
     $_SESSION["guess"] = null;
-    $readonly = "";
-
-    if ($tries == 0) {
-        $readonly = "disabled";
-    }
-
-    // if ($doGuess) {
-    //    $game = new Persla\Guess\Guess($number, $tries);
-    //    $res = $game->makeGuess($guess);
-    //    $_SESSION["tries"] = $game->tries();
-    // }
-
-
+    $_SESSION["doCheat"] = null;
+    $_SESSION["readonly"] = null;
 
     $data = [
         "guess" => $guess ?? null,
@@ -61,11 +44,11 @@ $app->router->get("guess/play", function () use ($app) {
         "number" => $number ?? null,
         "doGuess" => $doGuess ?? null,
         "doCheat" => $doCheat ?? null,
-        "readonly" => $readonly,
+        "readonly" => $readonly ?? null,
     ];
 
 
-    $app->page->add("guess/debug");
+    // $app->page->add("guess/debug");
     $app->page->add("guess/play", $data);
     // $app->page->add("guess/debug");
 
@@ -78,23 +61,15 @@ $app->router->get("guess/play", function () use ($app) {
  */
 $app->router->post("guess/play", function () use ($app) {
     //echo "Some debugging information";
-    $title = "Play the game";
-    // $data = [
-    //     "who" => "Batman",
-    // ];
+    // $title = "Play the game";
     $guess = $_POST["guess"] ?? null;
     $doInit = $_POST["doInit"] ?? null;
     $doGuess = $_POST["doGuess"] ?? null;
     $doCheat = $_POST["doCheat"] ?? null;
     $number = $_SESSION["number"] ?? null;
     $tries = $_SESSION["tries"] ?? null;
-    // $game = null;
-    // $res= null;
-    $readonly = "";
-
-    if ($tries == 0) {
-        $readonly = "disabled";
-    }
+    // $readonly = $_SESSION["readonly"] ?? null;
+    $readonly = "disabled";
 
     if ($doGuess) {
        $game = new Persla\Guess\Guess($number, $tries);
@@ -104,36 +79,34 @@ $app->router->post("guess/play", function () use ($app) {
        $_SESSION["guess"] = $guess;
     }
 
+    if ($doCheat) {
+        $_SESSION["doCheat"] = $doCheat;
+    }
 
+    if ($doInit) {
+        return $app->response->redirect("guess/init");
+    }
 
-    // $data = [
-    //     "guess" => "$guess",
-    //     "res" => "$res",
-    //     "tries" => "$tries",
-    //     "number" => "$number",
-    //     "doGuess" => "$doGuess",
-    //     "doCheat" => "$doCheat",
-    //     "readonly" => "$readonly",
-    // ];
+    if ($tries == 1 || $guess == $number) {
 
+        $_SESSION["readonly"] = $readonly;
+    }
 
     return $app->response->redirect("guess/play");
 });
+
+// $app->router->post("guess/play", function () use ($app) {
+//     //echo "Some debugging information";
+//     $title = "Play the game";
+//     $doCheat = $_POST["doCheat"] ?? null;
+//
+//     if ($doCheat) {
+//         $_SESSION["doCheat"] = $doCheat;
+//     }
+//     return $app->response->redirect("guess/play");
+// });
 
 
 /**
 * Showing message Hello World, rendered within the standard page layout.
  */
-$app->router->get("lek/hello-world-page", function () use ($app) {
-    $title = "Hello World as a page";
-    $data = [
-        "class" => "hello-world",
-        "content" => "Hello World in " . __FILE__,
-    ];
-
-    $app->page->add("anax/v2/article/default", $data);
-
-    return $app->page->render([
-        "title" => $title,
-    ]);
-});

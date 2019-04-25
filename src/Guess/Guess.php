@@ -69,12 +69,12 @@ class Guess
 
     public function endGame() : string
     {
-        $readonly = "";
-
-        if ($_SESSION["tries"] == 0) {
-            $readonly = "disabled";
-        }
-
+        // $readonly = "";
+        //
+        // if ($_SESSION["tries"] == 0) {
+        //     $readonly = "disabled";
+        // }
+        $readonly = "disabled";
         return $readonly;
     }
 
@@ -110,7 +110,7 @@ class Guess
             Click the <i>Start over</i> button to start a new game.";
             $this->endGame();
         } elseif ($guess === $this->number) {
-            $res = "CORRECT!";
+            $res = "CORRECT! Click the <i>Start over</i> button to start a new game.";
         } elseif ($guess > $this->number) {
             $res = "TO HIGH!";
         } else {
