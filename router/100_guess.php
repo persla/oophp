@@ -29,6 +29,33 @@ $app->router->get("guess/play", function () use ($app) {
     $data = [
         "who" => "Batman",
     ];
+    $guess = $_POST["guess"] ?? null;
+    $doInit = $_POST["doInit"] ?? null;
+    $doGuess = $_POST["doGuess"] ?? null;
+    $doCheat = $_POST["doCheat"] ?? null;
+    $number = $_SESSION["number"] ?? null;
+    $tries = $_SESSION["tries"] ?? null;
+    $game = null;
+    $res= null;
+    $readonly = "";
+
+    if ($doGuess) {
+       $game = new Persla\Guess\Guess($number, $tries);
+       $res = $game->makeGuess($guess);
+       $_SESSION["tries"] = $game->tries();
+   }
+
+   $data = [
+       "guess" => "$guess",
+       "res" => "$res",
+       "tries" => "$tries",
+       "number" => "$number",
+       "doGuess" => "$doGuess",
+       "doCheat" => "$doCheat",
+       "game" => "$game",
+   ];
+
+
 
     $app->page->add("guess/play", $data);
     $app->page->add("guess/debug");
