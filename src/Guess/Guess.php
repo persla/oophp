@@ -69,7 +69,7 @@ class Guess
 
     public function endGame() : string
     {
-        $readonly = "";
+        // $readonly = "";
 
         if ($_SESSION["tries"] == 0) {
             $readonly = "disabled";

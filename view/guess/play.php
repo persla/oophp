@@ -11,18 +11,16 @@ namespace Persla\View;
 
 // Prepare classes
 ?><h1>Guess my number</h1>
-<p>Guess a number between 1 and 100, you have <?= $_SESSION["tries"] ?> left</p>
-
+<!-- <p>Guess a number between 1 and 100, you have <?= $_SESSION["tries"] ?> left</p> -->
+<p>Guess a number between 1 and 100, you have <?= $tries ?> left</p>
+<?= var_dump($readonly); ?>
+<?= var_dump($tries); ?>
 <form method="post">
-    <input type="number"  name="guess">
-    <input type="submit" name="doGuess"  value="Make a guess">
-    <input type="submit" name="doInit" value="Start over">
-    <input type="submit" name="doCheat"  value="Cheat">
-    <!-- <input type="number" <?= $game->endGame(); ?> name="guess">
-    <input type="submit" name="doGuess" <?= $game->endGame(); ?> value="Make a guess">
-    <input type="submit" name="doInit" value="Start over">
-    <input type="submit" name="doCheat" <?= $game->endGame(); ?> value="Cheat"> -->
 
+    <input type="number" <?= $readonly ?> name="guess">
+    <input type="submit" name="doGuess" <?= $readonly ?> value="Make a guess">
+    <input type="submit" name="doInit" value="Start over">
+    <input type="submit" name="doCheat" <?= $readonly ?> value="Cheat">
 
 </form>
 
@@ -33,7 +31,7 @@ namespace Persla\View;
 <?php if ($doCheat) :?>
     <p>CHEAT: Current number is <?= $number ?> </p>
 <?php endif;?>
-
+debug text
 
 <pre>
 <!-- <?=var_dump($_POST)?>
