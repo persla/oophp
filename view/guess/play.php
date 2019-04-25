@@ -24,7 +24,7 @@ namespace Persla\View;
 
 </form>
 
-<?php if ($doGuess) :?>
+<?php if ($res) :?>
     <p>Your guess <?= $guess ?> is <?= $res ?> </p>
 <?php endif;?>
 
