@@ -72,11 +72,11 @@ $app->router->post("guess/play", function () use ($app) {
     $readonly = "disabled";
 
     if ($doGuess) {
-       $game = new Persla\Guess\Guess($number, $tries);
-       $res = $game->makeGuess($guess);
-       $_SESSION["tries"] = $game->tries();
-       $_SESSION["res"] = $res;
-       $_SESSION["guess"] = $guess;
+        $game = new Persla\Guess\Guess($number, $tries);
+        $res = $game->makeGuess($guess);
+        $_SESSION["tries"] = $game->tries();
+        $_SESSION["res"] = $res;
+        $_SESSION["guess"] = $guess;
     }
 
     if ($doCheat) {
@@ -88,7 +88,6 @@ $app->router->post("guess/play", function () use ($app) {
     }
 
     if ($tries == 1 || $guess == $number) {
-
         $_SESSION["readonly"] = $readonly;
     }
 
