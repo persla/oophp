@@ -16,4 +16,4 @@ I det senare fallet får man 0 poäng i omgången och turen går över till näs
 Vinner gör den som lyckas samla ihop 100 poäng.
 
 
-[Starta ett nytt spel](guess/init)
+[Starta ett nytt spel](hundred/init)

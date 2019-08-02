@@ -1,38 +1,27 @@
 <?php
 
-namespace Persla\View;
+// namespace Persla\View;
 
-/**
- * Render content within an article.
- */
+?><h1>Spelet först till hundra</h1>
+<?php
 
-// Show incoming variables and view helper functions
-//echo showEnvironment(get_defined_vars(), get_defined_functions());
+$hand = new Persla\Hundred\DiceHand();
+//
+$hand->roll();
 
-// Prepare classes
-?><h1>Guess my number</h1>
-<!-- <p>Guess a number between 1 and 100, you have <?= $_SESSION["tries"] ?> left</p> -->
-<p>Guess a number between 1 and 100, you have <?= $tries ?> left</p>
-<!-- <?= var_dump($readonly); ?>
-<?= var_dump($tries); ?> -->
+?>
+<!-- <h1>Rolling a dicehand with two dices</h1> -->
 <form method="post">
-
-    <input type="number" <?= $readonly ?> name="guess">
-    <input type="submit" name="doGuess" <?= $readonly ?> value="Make a guess">
-    <input type="submit" name="doInit" value="Start over">
-    <input type="submit" name="doCheat" <?= $readonly ?> value="Cheat">
-
+    <input type="submit" name="doRoll" value="Slå">
+    <input type="submit" name="doSave"  value="Spara">
+    <input type="submit" name="doInit" value="Start om">
 </form>
 
-<?php if ($res) :?>
-    <p>Your guess <?= $guess ?> is <?= $res ?> </p>
-<?php endif;?>
+<p><?= implode(", ", $hand->values()) ?></p>
+<p>Sum is: <?= $hand->sum() ?>.</p>
+<p>Average is: <?= $hand->average() ?>.</p>
+<!-- <h1>Rolling a dicehand with five dices</h1> -->
 
-<?php if ($doCheat) :?>
-    <p>CHEAT: Current number is <?= $number ?> </p>
-<?php endif;?>
+<!-- <?= $dice_hand->roll(); ?> -->
 
-<pre>
-<!-- <?=var_dump($_POST)?>
-<?=var_dump($_SESSION)?> -->
-</pre>
+<?php
