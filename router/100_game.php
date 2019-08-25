@@ -12,9 +12,13 @@
 $app->router->get("hundred/init", function () use ($app) {
     // Init the seiion for the gamestart
     $hand = new Persla\Hundred\DiceHand();
+    $handComputer = new Persla\Hundred\DiceHand();
     $_SESSION["hand"] = $hand;
+    $_SESSION["handComputer"] = $handComputer;
     $tosum1 = $_SESSION["tosum1"] ?? null;
     $_SESSION["tosum1"] = null;
+    $tosum1 = $_SESSION["tosum1Comp"] ?? null;
+    $_SESSION["tosum1Comp"] = null;
 
     return $app->response->redirect("hundred/play");
 });
@@ -25,33 +29,45 @@ $app->router->get("hundred/init", function () use ($app) {
  * Render the game status .
  */
 $app->router->get("hundred/play", function () use ($app) {
-    //echo "Some debugging information";
+
     $title = "Play the game";
     $doRoll = $_SESSION["doRoll"] ?? null;
+    $doRollComp = $_SESSION["doRollComp"] ?? null;
     $doSave = $_SESSION["doSave"] ?? null;
+
     $tosum2 = $_SESSION["tosum2"]?? null;
     $tosum1 = $_SESSION["tosum1"] ?? null;
-    $dice1 = $_SESSION["dice1"]?? null;
-    $dice2 = $_SESSION["dice2"]?? null;
+    $tosum2Comp = $_SESSION["tosum2Comp"]?? null;
+    $tosum1Comp = $_SESSION["tosum1Comp"] ?? null;
+
+    $dices = $_SESSION["dices"]?? null;
+    $dicesComp = $_SESSION["dicesComp"]?? null;
+
     $hand = $_SESSION["hand"]?? null;
+    $handComputer = $_SESSION["handComputer"]?? null;
+
     $_SESSION["doRoll"] = null;
+    $_SESSION["doRollComp"] = null;
     $_SESSION["doSave"] = null;
-    // $_SESSION["tosum1"] = null;
     $_SESSION["tosum2"] = null;
+    $_SESSION["tosum2Comp"] = null;
+    $_SESSION["dices"] = null;
+    $_SESSION["dicesComp"] = null;
 
 
     $data = [
         "doRoll" => $doRoll ?? null,
+        "doRollComp" => $doRollComp ?? null,
         "doSave" => $doSave ?? null,
         "hand" => $hand,
-        "dice1" => $dice1,
-        "dice2" => $dice2,
+        "handComputer" => $handComputer,
+        "dices" => $dices ?? null,
         "tosum2" => $tosum2,
         "tosum1" => $tosum1,
-
-        // $dice2 = $_SESSION["dice2"]?? null;
-        // "tries" => $tries,
-
+        "dicesComp" => $dicesComp ?? null,
+        "tosum2Comp" => $tosum2Comp,
+        "tosum1Comp" => $tosum1Comp,
+        // "saveplayer" => $saveplayer,
 
     ];
 
@@ -68,29 +84,32 @@ $app->router->get("hundred/play", function () use ($app) {
  */
 $app->router->post("hundred/play", function () use ($app) {
     //echo "Some debugging information";
-    // $hand = new Persla\Hundred\DiceHand();
     $hand = $_SESSION["hand"]?? null;
+    $handComputer = $_SESSION["handComputer"] ?? null;
     $title = "Play the game";
     $doRoll = $_POST["doRoll"] ?? null;
+    $doRollComp = $_POST["doRollComp"] ?? null;
     $doSave = $_POST["doSave"] ?? null;
+    $_SESSION["tosum2"] = null;
+    $_SESSION["tosum2Comp"] = null;
 
     if ($doRoll) {
-        // $hand = new Persla\Hundred\DiceHand();
-        // $hand->roll();
-        $hand->roll_dice_1();
-        $hand->roll_dice_2();
         $_SESSION["doRoll"] = $doRoll;
-        $_SESSION["dice1"] = $hand->roll_dice_1();
-        $_SESSION["dice2"] = $hand->roll_dice_2();
+        $_SESSION["dices"] = $hand->roll();
         $_SESSION["tosum2"] = $hand->total_score_round();
-
     }
+
     if ($doSave) {
         $_SESSION["doSave"] = $doSave;
-        $_SESSION["tosum1"] = $hand->total_score();
-        // $_SESSION["tosum2"] = null;
+        $_SESSION["tosum1"] = $hand->total_score_player();
     }
 
+    if ($doRollComp) {
+        $_SESSION["doRollComp"] = $doRollComp;
+        $_SESSION["dicesComp"] = $handComputer->roll(6);
+        $_SESSION["tosum2Comp"] = $handComputer->total_score_round();
+        $_SESSION["tosum1Comp"] = $handComputer->total_score_player();
+    }
 
     return $app->response->redirect("hundred/play");
 });
