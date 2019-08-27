@@ -29,28 +29,14 @@ class Dice
     // }
 }
 
-
-// class DiceHands
-// {
-//
-//     private $dices = [];
-//     private $antal = 1;
-//
-//
-//     public function __construct()
+// public function printHistogram(int $min = null, int $max = null)
 //     {
-//         for ($x = 0; $x <= 5; $x++) {
-//         $this->dices[$x] = new Dice();
+//         $history = array_count_values($this->serie);
+//         $string = "";
+//         foreach ( $history as $key=>$item ) {
+//             $string .= "$key: ";
+//             $string .= str_repeat("*", $item);
+//             $string .= "<br>";
 //         }
-//     }
-//
-//     public function roll()
-//     {
-//         $res= "";
-//         foreach ($this->dices as $i => $i_value) {
-//              $res .=  "Tärning {$this->antal} visar {$i_value->number}.\n";
-//              ++$this->antal;
-//         }
-//             return $res;
-//     }
-// }
+//         return $string;
+//     }ksort()???

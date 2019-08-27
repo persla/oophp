@@ -13,7 +13,10 @@ lägger till de samlade tärningsögonen till totalpoängen) eller kastar en ett
 en eller båda tärningarna.
 I det senare fallet får man 0 poäng i omgången och turen går över till nästa spelare.
 
+Du spelar mot datorn som alltid kastar 2 tärningar tre gånger per runda.
+
 Vinner gör den som lyckas samla ihop 100 poäng.
+
 
 
 [Starta ett nytt spel](hundred/init)

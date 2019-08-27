@@ -32,13 +32,16 @@ class GameController
         }
         return $this->values;
     }
-
+    public function values()
+    {
+        return $this->values;
+    }
     /**
      *  Method that sums up the value of the latest dice roll
      */
     public function sumOfDicesThrown()
     {
-        $this->sumOfDicesCurrentRound = array_sum($this->values);
+        $this->sumOfDicesCurrentRound = array_sum($this->values());
         return $this->sumOfDicesCurrentRound;
     }
 
@@ -50,17 +53,26 @@ class GameController
         // $this->totalScoreCurrentRound = [];
         if (in_array(1, $this->values)) {
             $this->totalScoreCurrentRound = [];
-            return (array_sum($this->totalScoreCurrentRound));
+            return array_sum($this->totalScoreCurrentRound);
         } else {
             array_push($this->totalScoreCurrentRound, $this->sumOfDicesThrown());
-            return (array_sum($this->totalScoreCurrentRound));
+            return array_sum($this->totalScoreCurrentRound);
         }
     }
+    public function valuesTotalScoreRound()
+    {
+        return array_sum($this->totalScoreCurrentRound);
+    }
+
 
     public function totalScorePlayer()
     {
         array_push($this->totalScorePlayer, array_sum($this->totalScoreCurrentRound));
         $this->totalScoreCurrentRound = [];
         return (array_sum($this->totalScorePlayer));
+    }
+    public function valuesTotalScorePlayer()
+    {
+        return array_sum($this->totalScorePlayer);
     }
 }
