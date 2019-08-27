@@ -7,7 +7,7 @@ namespace Persla\Hundred;
 
 class Dice
 {
-    protected $lastRoll;
+    // private $lastRoll;
 
     public function __construct()
     {
@@ -15,18 +15,18 @@ class Dice
         $this->number = $number;
     }
 
-    public function roll()
+    public function rollOneDice()
     {
         $number = rand(1, 6);
         $this->number = $number;
         return $this->number;
     }
 
-    public function getLastRoll()
-    {
-        $this->lastRoll = $this->number;
-        return $this->lastRoll;
-    }
+    // public function getLastRoll()
+    // {
+    //     $this->lastRoll = $this->number;
+    //     return $this->lastRoll;
+    // }
 }
 
 

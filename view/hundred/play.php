@@ -64,7 +64,7 @@ Din tur!
 
 
 
-<pre>
-<!-- <?=var_dump($_POST)?> -->
+<!-- <pre>
+<?=var_dump($_POST)?>
 <?=var_dump($_SESSION)?>
-</pre>
+</pre> -->
