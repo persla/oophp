@@ -59,8 +59,8 @@ Din tur!
 </div>
 
 
-<!-- <?php var_dump($doRoll);?>
-<?php var_dump($doSave);?> -->
+<?php var_dump($histogram);?>
+<!-- <?php var_dump($doSave);?> -->
 
 
 

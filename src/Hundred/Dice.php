@@ -8,6 +8,10 @@ namespace Persla\Hundred;
 class Dice
 {
     // private $lastRoll;
+    protected $lastRoll;
+    protected $sides = 6;
+    protected $allaRolls = [];
+    protected $values;
 
     public function __construct()
     {
@@ -15,18 +19,23 @@ class Dice
         $this->number = $number;
     }
 
-    public function rollOneDice()
+    public function roll()
     {
         $number = rand(1, 6);
         $this->number = $number;
         return $this->number;
     }
 
-    // public function getLastRoll()
-    // {
-    //     $this->lastRoll = $this->number;
-    //     return $this->lastRoll;
-    // }
+    public function getLastRoll()
+    {
+        $this->values[] = $this->number;
+        return $this->lastRoll;
+    }
+
+    public function getAllRolls()
+    {
+        return $this->values;
+    }
 }
 
 // public function printHistogram(int $min = null, int $max = null)
